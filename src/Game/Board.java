@@ -1,4 +1,6 @@
-package Rooms;
+package Game;
+
+import Rooms.Room;
 
 public class Board {
     private Room[][] map;
