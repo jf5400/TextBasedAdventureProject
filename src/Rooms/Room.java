@@ -35,10 +35,10 @@ public class Room {
 
     public String toString(){
         if(occupant!=null){
-            return "P";
+            return "[P]";
         }
         else{
-            return "[]";
+            return "[ ]";
         }
     }
 }
