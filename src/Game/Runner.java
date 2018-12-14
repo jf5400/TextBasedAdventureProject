@@ -3,6 +3,8 @@ package Game;
 import People.Person;
 import Rooms.Room;
 import Rooms.Cornucopia;
+import Rooms.Lake;
+import Rooms.Forest;
 
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class Runner {
         //do it for 5 rooms instead
         building[3][3] = new Cornucopia(3,3);
 
-        /*/Fill half the building with Lake rooms
+        //Fill half the building with Lake rooms
         for (int x = 0; x<(building.length)/2; x++)
         {
             for (int y = 0; y < building[x].length; y++)
@@ -40,7 +42,7 @@ public class Runner {
                 building[x][y] = new Lake(x,y);
             }
         }
-        */
+
 
         //Setup player 1 and the input scanner
         Person player1 = new Person("FirstName", "FamilyName", 3,3);
