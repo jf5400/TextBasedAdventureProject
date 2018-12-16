@@ -19,4 +19,8 @@ public class Lake extends Room{
         x.setyLoc(this.yLoc);
         System.out.println("");
     }
+    @Override
+    public String toString(){
+        return("[L]");
+    }
 }

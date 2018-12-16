@@ -5,6 +5,10 @@ import Rooms.Room;
 import Rooms.Cornucopia;
 import Rooms.Lake;
 import Rooms.Forest;
+import Items.Food;
+import Items.Knife;
+import People.Contestant;
+import Rooms.Beach;
 
 import java.util.Scanner;
 
@@ -22,47 +26,53 @@ public class Runner {
             }
         }
 
-        //do it for 5 rooms instead
-        building[3][3] = new Cornucopia(3,3);
+        building[2][2] = new Cornucopia(3,3);
 
-        //Fill half the building with Lake rooms
-        for (int x = 0; x<(building.length)/2; x++)
-        {
-            for (int y = 0; y < building[x].length; y++)
-            {
-                building[x][y] = new Lake(x,y);
-            }
+        building[2][1] = new Beach(2,1);
+        building[2][3] = new Beach(2,3);
+        for(int i=1; i<4; i++){
+            building[1][i] = new Beach(1,i);
+            building[3][i] = new Beach(3,i);
         }
 
-        //Fill half the building with Forest rooms
-        for (int x = 5; x<(building.length)/2; x++)
+        //Fill half of the remaining rooms with Lake or Forest rooms
+        for (int x = 0; x<5; x++)
         {
-            for (int y = 0; y < building[x].length; y++)
-            {
-                building[x][y] = new Lake(x,y);
-            }
+            building[x][0] = new Lake(x,0);
+            building[x][4] = new Forest(x,4);
+        }
+        for(int x=1; x<4;x++){
+            building[0][x] = new Lake(0,x);
+            building[4][x] = new Forest(4,x);
         }
 
+
+        int x = (int)(Math.random()*building.length);
+        int y = (int)(Math.random()*building.length);
+        Contestant k = new Contestant(x, y);
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person("FirstName", "FamilyName", 3,3);
+        Person player1 = new Person("FirstName", "FamilyName", 2,2);
         building[2][2].enterRoom(player1);
         Scanner in = new Scanner(System.in);
         while(gameOn)
         {
-            System.out.println("Where would you like to move? (Choose N, S, E, W)");
-            map.print();
-            String move = in.nextLine();
-            if(validMove(move, player1, building))
-            {
-                System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+            while(player1.gethealth()>0){
+                map.print();
+                System.out.println("Where would you like to move? (Choose N, S, E, W)");
+                String move = in.nextLine();
 
+                // TO WIN GAME THEY HAVE TO FIND THE BOW AND ARROW AND MAKE IT BACK TO THE CORNICOPIA
+
+                if(validMove(move, player1, building))
+                {
+                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+
+                }
+                else {
+                    System.out.println("Please choose a valid move.");
+                }
             }
-            else {
-                System.out.println("Please choose a valid move.");
-            }
-
-
         }
         in.close();
     }

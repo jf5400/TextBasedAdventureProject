@@ -38,7 +38,7 @@ public class Room {
             return "[P]";
         }
         else{
-            return "[ ]";
+            return "[X]";
         }
     }
 }

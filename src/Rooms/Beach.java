@@ -1,10 +1,9 @@
 package Rooms;
-import People.Person;
 
 import People.Person;
 
-public class Dead extends Room{
-    public Dead(int x, int y) {
+public class Beach extends Room{
+    public Beach(int x, int y) {
         super(x, y);
     }
 
@@ -17,5 +16,10 @@ public class Dead extends Room{
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+    }
+
+    @Override
+    public String toString(){
+        return("[B]");
     }
 }
