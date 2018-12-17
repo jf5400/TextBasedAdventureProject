@@ -8,19 +8,22 @@ public class Lake extends Room{
         super(x, y);
     }
 
+    @Override
+    public String getName(){
+        return "Lake";
+    }
+
     /**
      * Triggers the
      * @param x the Person entering
      */
     @Override
     public void enterRoom(Person x) {
+        position = "[L]";
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         System.out.println("");
-    }
-    @Override
-    public String toString(){
-        return("[L]");
+        x.inLake();
     }
 }

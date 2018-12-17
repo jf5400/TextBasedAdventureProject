@@ -12,6 +12,21 @@ public class Person {
     int health;
     final int maxhealth=100;
     boolean Bowandarrow=false;
+    boolean Lake = false;
+    boolean Forest = false;
+    boolean Beach = false;
+
+    public boolean inLake(){
+        return Lake = true;
+    }
+
+    public boolean inForest(){
+        return Forest=true;
+    }
+
+    public boolean inBeach(){
+        return Beach =true;
+    }
 
     public int getxLoc() {
         return xLoc;

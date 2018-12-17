@@ -8,18 +8,22 @@ public class Forest extends Room {
         super(x, y);
     }
 
+    public String getName(){
+        return "Forest";
+    }
+
     /**
      * Triggers the game ending conditions. CHANGE
      * @param x the Person entering
      */
     @Override
     public void enterRoom(Person x) {
+
+        position = "[F]";
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-    }
-    @Override
-    public String toString(){
-        return("[F]");
+        x.inForest();
+        System.out.println("enter");
     }
 }

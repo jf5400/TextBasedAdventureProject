@@ -10,6 +10,7 @@ import Items.Knife;
 import People.Contestant;
 import Rooms.Beach;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Runner {
@@ -46,10 +47,14 @@ public class Runner {
             building[4][x] = new Forest(4,x);
         }
 
-
-        int x = (int)(Math.random()*building.length);
-        int y = (int)(Math.random()*building.length);
-        Contestant k = new Contestant(x, y);
+        int start = 0;
+        for(int i=0; i<11; i++){
+            int x = (int)(Math.random()*building.length);
+            int y = (int)(Math.random()*building.length);
+            while(x==3 && y==3) {
+                Contestant k = new Contestant(x, y);
+            }
+        }
 
         //Setup player 1 and the input scanner
         Person player1 = new Person("FirstName", "FamilyName", 2,2);
@@ -58,19 +63,35 @@ public class Runner {
         while(gameOn)
         {
             while(player1.gethealth()>0){
-                map.print();
+                // To see if it is the beginning of the game
+                if(start==0){
+                    System.out.println("Here is your map:");
+                    map.print();
+                    System.out.println("If you would like to see the map again choose M");
+                    System.out.println("If you would like to move choose N, S, E, W)");
+                    start=1;
+                }
+                //int health=Person.gethealth();
+                System.out.println("Health: "+"\nFood:"+ "\nHas Knife?");
+
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
 
+                if(move=="M"){
+                    map.print();
+                }
+                if(move=="m"){
+                    map.print();
+                }
                 // TO WIN GAME THEY HAVE TO FIND THE BOW AND ARROW AND MAKE IT BACK TO THE CORNICOPIA
 
                 if(validMove(move, player1, building))
                 {
-                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                    System.out.println("Would you like to go to the "+Forest.getName()+"?");
 
                 }
                 else {
-                    System.out.println("Please choose a valid move.");
+                    System.out.println("Please can't run in that direction, choose another quickly!");
                 }
             }
         }

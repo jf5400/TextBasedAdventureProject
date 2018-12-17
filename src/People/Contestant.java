@@ -2,6 +2,11 @@ package People;
 
 public class Contestant{
     int xLoc, yLoc;
+    boolean inRoom=false;
+
+    public boolean ifinRoom(){
+        return inRoom;
+    }
 
     public int getxLoc() {
         return xLoc;

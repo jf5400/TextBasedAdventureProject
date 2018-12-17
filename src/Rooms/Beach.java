@@ -7,19 +7,21 @@ public class Beach extends Room{
         super(x, y);
     }
 
+    public String getName(){
+        return "Beach";
+    }
+
     /**
      * Triggers the game ending conditions. CHANGE
      * @param x the Person entering
      */
     @Override
     public void enterRoom(Person x) {
+        position = "[B]";
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-    }
-
-    @Override
-    public String toString(){
-        return("[B]");
+        x.inBeach();
+        System.out.println("Hurry, you don't want to be on the beach for too long! The other contestants can see you really clearly!");
     }
 }

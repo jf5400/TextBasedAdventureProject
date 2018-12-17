@@ -5,11 +5,18 @@ import People.Person;
 public class Room {
     Person occupant;
     int xLoc,yLoc;
+    String position;
+    String name;
 
     public Room(int x, int y)
     {
         xLoc = x;
         yLoc = y;
+        position = "[X]";
+    }
+
+    public static String getName(Person x){
+        return "";
     }
 
     /**
@@ -38,7 +45,7 @@ public class Room {
             return "[P]";
         }
         else{
-            return "[X]";
+            return position;
         }
     }
 }
