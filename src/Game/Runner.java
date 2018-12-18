@@ -96,6 +96,8 @@ public class Runner {
         System.out.println("Health: "+p.gethealth()+"\nFood: "+p.getnumoffood()+"\nHas Knife? "+p.getKnife());
     }
 
+    Contestant[] list = new Contestant[28];
+
     public static void FillBoard(Room[][] building, int n){
         building[n/2][n/2] = new Cornucopia(n/2,n/2);
 
@@ -116,12 +118,11 @@ public class Runner {
             building[n-1][x] = new Forest(n-1,x);
         }
 
-        int start = 0;
-        for(int i=0; i<11; i++){
+        for(int i=0; i<((n/2)+1)*n; i++){
             int x = (int)(Math.random()*building.length);
             int y = (int)(Math.random()*building.length);
-            while(x==3 && y==3) {
-                Contestant k = new Contestant(x, y);
+            while(x==(n/2) && y==(n/2)) {
+                building[x][y].enterRoom(list[i]);
             }
         }
     }
