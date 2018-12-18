@@ -8,7 +8,7 @@ public class Lake extends Room{
         super(x, y);
     }
 
-    @Override
+    //@Override
     public String getName(){
         return "Lake";
     }

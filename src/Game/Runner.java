@@ -10,7 +10,6 @@ import Items.Knife;
 import People.Contestant;
 import Rooms.Beach;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Runner {
@@ -18,8 +17,36 @@ public class Runner {
 
     public static void main(String[] args)
     {
-        Room[][] building = new Room[5][5];
-        Board map = new Board(building);
+        int dimen=-1;
+        while(dimen!=3 && dimen !=5 &&  dimen!=7){
+            if(dimen==-1){
+                Scanner other =new Scanner(System.in);
+                System.out.println("What would you like the n to be for your n x n board to be? (3x3, 5x5, 7x7) (If n is 5 or 7 you can try the hard game)");
+                dimen = other.nextInt() ;
+            }
+            else{
+                Scanner other =new Scanner(System.in);
+                System.out.println("Pick another for your board (3x3, 5x5, 7x7)");
+                dimen = other.nextInt() ;
+            }
+        }
+
+        String decision="";
+
+        if(dimen==5 || dimen==7){
+            Scanner choice=new Scanner(System.in);
+            System.out.println("Would you like to try the hard game? If yes press Y");
+            decision = choice.nextLine();
+            decision.toLowerCase().trim();
+        }
+        Room[][] building = new Room[dimen][dimen];
+
+        Board map = new Board(building, dimen);
+        if(decision.equals("y")){
+            map = new Board(building, dimen, true );
+            map.print();
+        }
+
 
         for (int i=0; i<building.length; i++){
             for (int j=0; j<building[i].length; j++){
@@ -27,38 +54,11 @@ public class Runner {
             }
         }
 
-        building[2][2] = new Cornucopia(3,3);
-
-        building[2][1] = new Beach(2,1);
-        building[2][3] = new Beach(2,3);
-        for(int i=1; i<4; i++){
-            building[1][i] = new Beach(1,i);
-            building[3][i] = new Beach(3,i);
-        }
-
-        //Fill half of the remaining rooms with Lake or Forest rooms
-        for (int x = 0; x<5; x++)
-        {
-            building[x][0] = new Lake(x,0);
-            building[x][4] = new Forest(x,4);
-        }
-        for(int x=1; x<4;x++){
-            building[0][x] = new Lake(0,x);
-            building[4][x] = new Forest(4,x);
-        }
-
-        int start = 0;
-        for(int i=0; i<11; i++){
-            int x = (int)(Math.random()*building.length);
-            int y = (int)(Math.random()*building.length);
-            while(x==3 && y==3) {
-                Contestant k = new Contestant(x, y);
-            }
-        }
+        int start=0;
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person("FirstName", "FamilyName", 2,2);
-        building[2][2].enterRoom(player1);
+        Person player1 = new Person("FirstName", "FamilyName", dimen/2,dimen/2);
+        building[dimen/2][dimen/2].enterRoom(player1);
         Scanner in = new Scanner(System.in);
         while(gameOn)
         {
@@ -77,17 +77,14 @@ public class Runner {
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
 
-                if(move=="M"){
-                    map.print();
-                }
-                if(move=="m"){
+                if(move.toLowerCase().trim().equals("m")){
                     map.print();
                 }
                 // TO WIN GAME THEY HAVE TO FIND THE BOW AND ARROW AND MAKE IT BACK TO THE CORNICOPIA
 
                 if(validMove(move, player1, building))
                 {
-                    System.out.println("Would you like to go to the "+Forest.getName()+"?");
+                    System.out.println("Would you like to go to the?");
 
                 }
                 else {
@@ -96,6 +93,31 @@ public class Runner {
             }
         }
         in.close();
+    }
+
+
+    public void FillBoard(Room[][] building, int n){
+        building[n/2][n/2] = new Cornucopia(n/2,n/2);
+
+        //Fill half of the remaining rooms with Lake or Forest rooms
+        for (int x = 0; x<n; x++)
+        {
+            building[x][0] = new Lake(x,0);
+            building[x][n-1] = new Forest(x,n-1);
+        }
+        for(int x=1; x<n-1;x++){
+            building[0][x] = new Lake(0,x);
+            building[n-1][x] = new Forest(n-1,x);
+        }
+
+        int start = 0;
+        for(int i=0; i<11; i++){
+            int x = (int)(Math.random()*building.length);
+            int y = (int)(Math.random()*building.length);
+            while(x==3 && y==3) {
+                Contestant k = new Contestant(x, y);
+            }
+        }
     }
 
     /**
