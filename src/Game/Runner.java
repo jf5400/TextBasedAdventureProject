@@ -48,11 +48,14 @@ public class Runner {
         }
 
 
+
         for (int i=0; i<building.length; i++){
             for (int j=0; j<building[i].length; j++){
                 building[i][j] = new Room(i,j);
             }
         }
+
+        FillBoard(building, dimen);
 
         int start=0;
 
@@ -71,8 +74,8 @@ public class Runner {
                     System.out.println("If you would like to move choose N, S, E, W)");
                     start=1;
                 }
-                //int health=Person.gethealth();
-                System.out.println("Health: "+"\nFood:"+ "\nHas Knife?");
+
+                printthreethings(player1);
 
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
@@ -84,19 +87,22 @@ public class Runner {
 
                 if(validMove(move, player1, building))
                 {
-                    System.out.println("Would you like to go to the?");
+                    System.out.println("");
 
                 }
                 else {
-                    System.out.println("Please can't run in that direction, choose another quickly!");
+                    System.out.println("You can't run in that direction! Choose another quickly!");
                 }
             }
         }
         in.close();
     }
 
+    public static void printthreethings(Person p){
+        System.out.println("Health: "+p.gethealth()+"\nFood: "+p.getnumoffood()+"\nHas Knife? "+p.getKnife());
+    }
 
-    public void FillBoard(Room[][] building, int n){
+    public static void FillBoard(Room[][] building, int n){
         building[n/2][n/2] = new Cornucopia(n/2,n/2);
 
         //Fill half of the remaining rooms with Lake or Forest rooms
@@ -120,6 +126,8 @@ public class Runner {
         }
     }
 
+
+
     /**
      * Checks that the movement chosen is within the valid game map.
      * @param move the move chosen
@@ -135,6 +143,7 @@ public class Runner {
                 if (p.getxLoc() > 0)
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
+                    System.out.println("You are in the "+map[p.getxLoc()-1][p.getyLoc()].getName());
                     map[p.getxLoc()-1][p.getyLoc()].enterRoom(p);
                     return true;
                 }
@@ -146,6 +155,7 @@ public class Runner {
                 if (p.getyLoc()< map[p.getyLoc()].length -1)
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
+                    System.out.println("You are in the "+map[p.getxLoc()][p.getyLoc() + 1].getName());
                     map[p.getxLoc()][p.getyLoc() + 1].enterRoom(p);
                     return true;
                 }
@@ -158,6 +168,7 @@ public class Runner {
                 if (p.getxLoc() < map.length - 1)
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
+                    System.out.println("You are in the "+map[p.getxLoc()+1][p.getyLoc()].getName());
                     map[p.getxLoc()+1][p.getyLoc()].enterRoom(p);
                     return true;
                 }
@@ -170,6 +181,7 @@ public class Runner {
                 if (p.getyLoc() > 0)
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
+                    System.out.println("You are in the "+map[p.getxLoc()][p.getyLoc()-1].getName());
                     map[p.getxLoc()][p.getyLoc()-1].enterRoom(p);
                     return true;
                 }

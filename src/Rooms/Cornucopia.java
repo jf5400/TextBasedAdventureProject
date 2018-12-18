@@ -1,6 +1,7 @@
 package Rooms;
 
 import People.Person;
+import Game.Board;
 
 public class Cornucopia extends Room{
     public Cornucopia(int x, int y) {
@@ -36,5 +37,9 @@ public class Cornucopia extends Room{
         else {
             System.out.println("Get has much items as you could and run!!");
         }
+
+    }
+
+    public void enterRoom(Person x, Board b) {
     }
 }

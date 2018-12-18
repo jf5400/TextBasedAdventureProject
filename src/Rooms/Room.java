@@ -13,10 +13,11 @@ public class Room {
         xLoc = x;
         yLoc = y;
         position = "[X]";
+        this.name=name;
     }
 
-    public static String getName(Person x){
-        return "";
+    public String getName(){
+        return name;
     }
 
     /**

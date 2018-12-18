@@ -9,16 +9,25 @@ public class Board {
     private Room[][] map;
     private boolean hardLevel=false;
 
+    public boolean ifHardLevel(){
+        return hardLevel;
+    }
+
     public Board(Room [][] map, int n){
-        for(int i=1; i<n-1;i++){
-            if(i!=n/2){
-                map[n/2][i] = new Lake(n/2,i);
+        for (int i=0; i<map.length; i++){
+            for (int j=0; j<map[i].length; j++){
+                map[i][j] = new Room(i,j);
             }
         }
+        if(n==5 || n==7) {
+            for (int i = 1; i < n - 1; i++) {
+                map[n / 2][i] = new Lake(n / 2,i);
+            }
 
-        for(int i=1; i<n-1; i++){
-            map[1][i] = new Forest(1,i);
-            map[n-2][i] = new Lake(n-2,i);
+            for (int i = 1; i < n - 1; i++) {
+                map[1][i] = new Forest(1, i);
+                map[n - 2][i] = new Lake(n - 2, i);
+            }
         }
         this.map=map;
     }

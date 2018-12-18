@@ -24,6 +24,6 @@ public class Forest extends Room {
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         x.inForest();
-        System.out.println("enter");
+        System.out.println("You can either run, hunt, or gather food? (R, H, or F)");
     }
 }

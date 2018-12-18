@@ -52,6 +52,10 @@ public class Person {
         return health;
     }
 
+    public int addhealth(int n){
+        return health+n;
+    }
+
     public boolean getKnife(){
         return hasKnife;
     }
@@ -62,7 +66,7 @@ public class Person {
 
     public void eatfood(){
         if(health<90){
-            health+=10;
+            addhealth(10);
         }
         else{
             health=100;

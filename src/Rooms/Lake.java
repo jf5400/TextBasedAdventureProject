@@ -8,7 +8,6 @@ public class Lake extends Room{
         super(x, y);
     }
 
-    //@Override
     public String getName(){
         return "Lake";
     }
@@ -23,7 +22,7 @@ public class Lake extends Room{
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-        System.out.println("");
         x.inLake();
+        System.out.println("You can either run, hunt, or gather food? (R, H, or F)");
     }
 }
