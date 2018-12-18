@@ -39,20 +39,14 @@ public class Runner {
             decision = choice.nextLine();
             decision.toLowerCase().trim();
         }
+
         Room[][] building = new Room[dimen][dimen];
 
         Board map = new Board(building, dimen);
+
         if(decision.equals("y")){
             map = new Board(building, dimen, true );
             map.print();
-        }
-
-
-
-        for (int i=0; i<building.length; i++){
-            for (int j=0; j<building[i].length; j++){
-                building[i][j] = new Room(i,j);
-            }
         }
 
         FillBoard(building, dimen);
@@ -104,6 +98,12 @@ public class Runner {
 
     public static void FillBoard(Room[][] building, int n){
         building[n/2][n/2] = new Cornucopia(n/2,n/2);
+
+        for (int i=0; i<building.length; i++){
+            for (int j=0; j<building[i].length; j++){
+                building[i][j] = new Forest(i,j);
+            }
+        }
 
         //Fill half of the remaining rooms with Lake or Forest rooms
         for (int x = 0; x<n; x++)
