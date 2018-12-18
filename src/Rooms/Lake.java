@@ -31,7 +31,15 @@ public class Lake extends Room{
         choice = choice.toLowerCase().trim();
         if(choice.equals("h")){
             if(x.getKnife()){
-
+                int hunt=(int)(Math.random()*2);
+                if(hunt==0){
+                    System.out.println("You found a fish in the lake!");
+                    x.eatfood();
+                }
+                else{
+                    System.out.println("You hurt yourself while hunting, pay attention to you health next time!");
+                    x.addhealth(-10);
+                }
             }
             else{
                 System.out.println("You don't have a knife, you have to run somwhere else :( ");
@@ -45,7 +53,7 @@ public class Lake extends Room{
                 x.eatfood();
             }
             else{
-                System.out.println("You didn't eat any food, you should eat to keep your health up");
+                System.out.println("You couldn't find any food, you should eat to keep your health up");
             }
         }
         else{
