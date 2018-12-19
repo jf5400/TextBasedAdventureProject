@@ -21,7 +21,6 @@ public class Beach extends Room{
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-        x.inBeach();
         System.out.println("Hurry, you don't want to be on the beach for too long! Everyone can see you!");
     }
 }

@@ -2,6 +2,7 @@ package Rooms;
 
 import People.Person;
 import Game.Board;
+import Game.Runner;
 
 public class Cornucopia extends Room{
     public Cornucopia(int x, int y) {
@@ -31,8 +32,9 @@ public class Cornucopia extends Room{
             System.out.println("First, you must get your health to 100 by finding food and killing others.");
             start+=1;
         }
-        else if(x.inForest() && x.inLake() && x.inBeach()){
+        else if(x.inForest() && x.inLake()){
             System.out.println("You've won the game!");
+            Runner.gameOff();
         }
         else {
             System.out.println("Get has much items as you could and run!!");

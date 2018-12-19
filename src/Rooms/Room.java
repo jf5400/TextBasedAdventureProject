@@ -36,6 +36,7 @@ public class Room {
     {
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+        System.out.println("Contestant");
     }
 
     /**

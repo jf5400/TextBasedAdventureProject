@@ -14,18 +14,27 @@ public class Person {
     boolean Bowandarrow=false;
     boolean Lake = false;
     boolean Forest = false;
-    boolean Beach = false;
+    boolean Contestant = false;
 
-    public boolean inLake(){
+    public boolean ContestantLocation(){
+        return Contestant;
+    }
+
+    // To see if they went to a Lake Room
+    public boolean inLake(int n){
         return Lake = true;
     }
-
-    public boolean inForest(){
-        return Forest=true;
+    public boolean inLake(){
+        return Lake;
     }
 
-    public boolean inBeach(){
-        return Beach =true;
+
+    // To see if they went to a Forest Room
+    public boolean inForest(int n){
+        return Forest=true;
+    }
+    public boolean inForest(){
+        return Forest;
     }
 
     public int getxLoc() {

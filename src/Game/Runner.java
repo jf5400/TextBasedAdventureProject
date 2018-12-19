@@ -31,25 +31,31 @@ public class Runner {
             }
         }
 
-        String decision="";
-
-        if(dimen==5 || dimen==7){
-            Scanner choice=new Scanner(System.in);
-            System.out.println("Would you like to try the hard game? If yes press Y");
-            decision = choice.nextLine();
-            decision.toLowerCase().trim();
-        }
+        Scanner choice=new Scanner(System.in);
+        System.out.println("Would you like to try the challenge? If yes press Y");
+        String decision = choice.nextLine();
+        decision.toLowerCase().trim();
 
         Room[][] building = new Room[dimen][dimen];
 
-        Board map = new Board(building, dimen);
+        // One is for the challenge
+        Board map = new Board(building);
 
         if(decision.equals("y")){
-            map = new Board(building, dimen, true );
-            map.print();
+            map = new Board(building, true );
         }
 
         FillBoard(building, dimen);
+
+        Contestant[] list = new Contestant[28];
+        for(int i=0; i<((dimen/2)+1)*dimen; i++) {
+            int x = (int) (Math.random() * building.length);
+            int y = (int) (Math.random() * building.length);
+            if(x != (dimen / 2) && (y != (dimen / 2))) {
+                list[i] = new Contestant(x, y);
+                building[x][y].enterRoom(list[i]);
+            }
+        }
 
         int start=0;
 
@@ -96,37 +102,31 @@ public class Runner {
         System.out.println("Health: "+p.gethealth()+"\nFood: "+p.getnumoffood()+"\nHas Knife? "+p.getKnife());
     }
 
-    Contestant[] list = new Contestant[28];
-
+    //Fills the board with rooms
     public static void FillBoard(Room[][] building, int n){
-        building[n/2][n/2] = new Cornucopia(n/2,n/2);
-
         for (int i=0; i<building.length; i++){
             for (int j=0; j<building[i].length; j++){
-                building[i][j] = new Forest(i,j);
+                building[i][j] = new Room(i,j);
             }
         }
 
+        //Where the user starts
+        building[n/2][n/2] = new Cornucopia(n/2,n/2);
+
         //Fill half of the remaining rooms with Lake or Forest rooms
-        for (int x = 0; x<n; x++)
+        for (int x = 0; x<n/2; x++)
         {
-            building[x][0] = new Lake(x,0);
-            building[x][n-1] = new Forest(x,n-1);
-        }
-        for(int x=1; x<n-1;x++){
-            building[0][x] = new Lake(0,x);
-            building[n-1][x] = new Forest(n-1,x);
+            building[x][n/2] = new Lake(x,0);
+            building[x+(n/2)+1][n/2] = new Forest(x,n-1);
         }
 
-        for(int i=0; i<((n/2)+1)*n; i++){
-            int x = (int)(Math.random()*building.length);
-            int y = (int)(Math.random()*building.length);
-            while(x==(n/2) && y==(n/2)) {
-                building[x][y].enterRoom(list[i]);
+        for(int x=0; x<n;x++){
+            for(int y=0; y<n/2;y++){
+                building[x][y] = new Lake(x,y);
+                building[x][y+(n/2)+1] = new Forest(x,y);
             }
         }
     }
-
 
 
     /**

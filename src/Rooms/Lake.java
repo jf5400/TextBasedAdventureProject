@@ -20,11 +20,13 @@ public class Lake extends Room{
      */
     @Override
     public void enterRoom(Person x) {
+        x.inLake(2);
         position = "[L]";
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-        x.inLake();
+
+
         Scanner in =new Scanner(System.in);
         System.out.println("You can either run, hunt, or gather food? (R, H, or F)");
         String choice= in.nextLine();

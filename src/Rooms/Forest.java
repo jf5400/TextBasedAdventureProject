@@ -18,7 +18,7 @@ public class Forest extends Room {
      */
     @Override
     public void enterRoom(Person x) {
-
+        x.inForest(1);
         position = "[F]";
         occupant = x;
         x.setxLoc(this.xLoc);
