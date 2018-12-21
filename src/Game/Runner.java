@@ -5,6 +5,7 @@ import Rooms.Room;
 import Rooms.Cornucopia;
 import Rooms.Lake;
 import Rooms.Forest;
+import Game.Board;
 
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class Runner {
             map = new Board(building, dimen, true );
         }
 
-        FillBoard(building, dimen);
+        FillBoard(map, dimen);
 
         int start=0;
 
@@ -94,27 +95,28 @@ public class Runner {
     }
 
     //Fills the board with rooms
-    public static void FillBoard(Room[][] building, int n){
-        for (int i=0; i<building.length; i++){
-            for (int j=0; j<building[i].length; j++){
-                building[i][j] = new Room(i,j);
-            }
-        }
+    public static void FillBoard(Board building, int n){
+        Room[][] map = building.getMap();
 
         //Where the user starts
-        building[n/2][n/2] = new Cornucopia(n/2,n/2);
+        map[n/2][n/2] = new Cornucopia(n/2,n/2);
 
-        //Fill half of the remaining rooms with Lake or Forest rooms
-        for (int x = 0; x<n/2; x++)
-        {
-            building[x][n/2] = new Lake(x,0);
-            building[x+(n/2)+1][n/2] = new Forest(x,n-1);
+        if(building.isHardLevel()){
+
         }
+        else{
+            //Fill half of the remaining rooms with Lake or Forest rooms
+            for (int x = 0; x<n/2; x++)
+            {
+                map[x][n/2] = new Lake(x,0);
+                map[x+(n/2)+1][n/2] = new Forest(x,n-1);
+            }
 
-        for(int x=0; x<n;x++){
-            for(int y=0; y<n/2;y++){
-                building[x][y] = new Lake(x,y);
-                building[x][y+(n/2)+1] = new Forest(x,y);
+            for(int x=0; x<n;x++){
+                for(int y=0; y<n/2;y++){
+                    map[x][y] = new Lake(x,y);
+                    map[x][y+(n/2)+1] = new Forest(x,y);
+                }
             }
         }
     }

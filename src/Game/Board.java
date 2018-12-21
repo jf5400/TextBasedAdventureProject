@@ -9,7 +9,20 @@ public class Board {
     private Room[][] map;
     private boolean hardLevel = false;
 
+    public boolean isHardLevel(){
+        return hardLevel;
+    }
+
+    public Room[][] getMap() {
+        return map;
+    }
+
     public Board(Room [][] map, int n){
+        for (int i=0; i<map.length; i++){
+            for (int j=0; j<map[i].length; j++){
+                map[i][j] = new Room(i,j);
+            }
+        }
         for(int i=1; i<n-1;i++){
             if(i!=n/2){
                 map[n/2][i] = new Lake(n/2,i);
