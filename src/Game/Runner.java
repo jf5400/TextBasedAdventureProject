@@ -5,10 +5,6 @@ import Rooms.Room;
 import Rooms.Cornucopia;
 import Rooms.Lake;
 import Rooms.Forest;
-import Items.Food;
-import Items.Knife;
-import People.Contestant;
-import Rooms.Beach;
 
 import java.util.Scanner;
 
@@ -31,31 +27,26 @@ public class Runner {
             }
         }
 
-        Scanner choice=new Scanner(System.in);
-        System.out.println("Would you like to try the challenge? If yes press Y");
-        String decision = choice.nextLine();
-        decision.toLowerCase().trim();
+        String decision="";
+
+        // To see if they want the harder level
+        if(dimen==5 || dimen==7){
+            Scanner choice=new Scanner(System.in);
+            System.out.println("Would you like to try the hard game? If yes press Y");
+            decision = choice.nextLine();
+            decision.toLowerCase().trim();
+        }
 
         Room[][] building = new Room[dimen][dimen];
 
         // One is for the challenge
-        Board map = new Board(building);
+        Board map = new Board(building,dimen);
 
         if(decision.equals("y")){
-            map = new Board(building, true );
+            map = new Board(building, dimen, true );
         }
 
         FillBoard(building, dimen);
-
-        Contestant[] list = new Contestant[28];
-        for(int i=0; i<((dimen/2)+1)*dimen; i++) {
-            int x = (int) (Math.random() * building.length);
-            int y = (int) (Math.random() * building.length);
-            if(x != (dimen / 2) && (y != (dimen / 2))) {
-                list[i] = new Contestant(x, y);
-                building[x][y].enterRoom(list[i]);
-            }
-        }
 
         int start=0;
 

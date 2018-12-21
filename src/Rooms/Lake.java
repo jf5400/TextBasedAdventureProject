@@ -1,6 +1,5 @@
 package Rooms;
 
-import Game.Runner;
 import People.Person;
 
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class Lake extends Room{
     }
 
     /**
-     * Triggers the
+     * Player going into the Lake
      * @param x the Person entering
      */
     @Override

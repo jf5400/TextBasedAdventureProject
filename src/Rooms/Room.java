@@ -1,7 +1,6 @@
 package Rooms;
 
 import People.Person;
-import People.Contestant;
 
 public class Room {
     Person occupant;
@@ -30,13 +29,6 @@ public class Room {
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-    }
-
-    public void enterRoom(Contestant x)
-    {
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
-        System.out.println("Contestant");
     }
 
     /**

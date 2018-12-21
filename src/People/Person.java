@@ -8,17 +8,13 @@ public class Person {
     String familyName;
     int xLoc, yLoc;
     int numoffood;
-    boolean hasKnife=false;
+    boolean Knife=false;
     int health;
     final int maxhealth=100;
     boolean Bowandarrow=false;
     boolean Lake = false;
     boolean Forest = false;
-    boolean Contestant = false;
 
-    public boolean ContestantLocation(){
-        return Contestant;
-    }
 
     // To see if they went to a Lake Room
     public boolean inLake(int n){
@@ -65,8 +61,12 @@ public class Person {
         return health+n;
     }
 
+    public boolean hasKnife(){
+        return Knife=true;
+    }
+
     public boolean getKnife(){
-        return hasKnife;
+        return Knife;
     }
 
     public boolean getBowandarrow(){

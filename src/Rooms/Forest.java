@@ -1,6 +1,5 @@
 package Rooms;
 
-import Game.Runner;
 import People.Person;
 
 public class Forest extends Room {
@@ -13,7 +12,7 @@ public class Forest extends Room {
     }
 
     /**
-     * Triggers the game ending conditions. CHANGE
+     * Player going into the Forest
      * @param x the Person entering
      */
     @Override
