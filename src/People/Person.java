@@ -17,40 +17,20 @@ public class Person {
 
 
     // To see if they went to a Lake Room
-    public boolean inLake(int n){
+    public boolean inLake(){
         return Lake = true;
     }
-    public boolean inLake(){
+    public boolean Lake(){
         return Lake;
     }
 
 
     // To see if they went to a Forest Room
-    public boolean inForest(int n){
+    public boolean inForest(){
         return Forest=true;
     }
-    public boolean inForest(){
+    public boolean Forest(){
         return Forest;
-    }
-
-    public int getxLoc() {
-        return xLoc;
-    }
-
-    public void setxLoc(int xLoc) {
-        this.xLoc = xLoc;
-    }
-
-    public int getyLoc() {
-        return yLoc;
-    }
-
-    public void setyLoc(int yLoc) {
-        this.yLoc = yLoc;
-    }
-
-    public int getnumoffood(){
-        return numoffood;
     }
 
     public int gethealth(){
@@ -72,15 +52,32 @@ public class Person {
     public boolean getBowandarrow(){
         return Bowandarrow;
     }
+    public boolean hasBowandarrow(){return Bowandarrow = true;}
 
-    public void eatfood(){
-        if(health<90){
+    public void eatfood(int n){
+        if(health < maxhealth - n){
             addhealth(10);
         }
         else{
-            health=100;
+            health = maxhealth;
         }
         numoffood-=1;
+    }
+
+    public int getxLoc() {
+        return xLoc;
+    }
+
+    public void setxLoc(int xLoc) {
+        this.xLoc = xLoc;
+    }
+
+    public int getyLoc() {
+        return yLoc;
+    }
+
+    public void setyLoc(int yLoc) {
+        this.yLoc = yLoc;
     }
 
     public Person (String firstName, String familyName, int xLoc, int yLoc)

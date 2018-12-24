@@ -43,15 +43,13 @@ public class Board {
                 map[i][j] = new Room(i,j);
             }
         }
-        for(int i=1; i<n-1;i++){
-            if(i!=n/2){
-                map[n/2][i] = new Beach(n/2,i);
-            }
+        for(int y=(n/2)-1; y<(n/2);y++){
+            map[n/2][y] =new Beach(n/2,y);
+            map[n/2][y+2] =new Beach(n/2,y);
         }
-
-        for(int i=1; i<n-1; i++){
-            map[1][i] = new Beach(1,i);
-            map[n-2][i] = new Beach(n-2,i);
+        for (int y = (n/2)-1; y < (n/2)+2; y++) {
+            map[(n/2)-1][y] = new Beach((n/2)-1, y);
+            map[(n/2)+1][y] = new Beach((n/2)+1, y);
         }
         this.map=map;
     }

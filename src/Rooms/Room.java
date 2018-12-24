@@ -1,6 +1,7 @@
 package Rooms;
 
 import People.Person;
+import Game.Board;
 
 public class Room {
     Person occupant;
@@ -24,7 +25,7 @@ public class Room {
      * Method controls the results when a person enters this room.
      * @param x the Person entering
      */
-    public void enterRoom(Person x)
+    public void enterRoom(Person x, Board b)
     {
         occupant = x;
         x.setxLoc(this.xLoc);

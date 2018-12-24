@@ -1,5 +1,6 @@
 package Game;
 
+import Items.BowandArrow;
 import People.Person;
 import Rooms.Room;
 import Rooms.Cornucopia;
@@ -51,9 +52,11 @@ public class Runner {
 
         int start=0;
 
+        BowandArrow challenge = new BowandArrow();
+
         //Setup player 1 and the input scanner
         Person player1 = new Person("FirstName", "FamilyName", dimen/2,dimen/2);
-        building[dimen/2][dimen/2].enterRoom(player1);
+        building[dimen/2][dimen/2].enterRoom(player1, map);
         Scanner in = new Scanner(System.in);
         while(gameOn)
         {
@@ -75,9 +78,14 @@ public class Runner {
                 if(move.toLowerCase().trim().equals("m")){
                     map.print();
                 }
-                // TO WIN GAME THEY HAVE TO FIND THE BOW AND ARROW AND MAKE IT BACK TO THE CORNICOPIA
 
-                if(validMove(move, player1, building))
+                if(map.isHardLevel()){
+                    if(player1.getxLoc()==0 && player1.getyLoc()==0) {
+                        BowandArrow(player1, challenge);
+                    }
+                }
+
+                if(validMove(move, player1, map))
                 {
                     System.out.println("");
 
@@ -87,11 +95,16 @@ public class Runner {
                 }
             }
         }
+        gameOff(player1);
         in.close();
     }
 
+    public static void BowandArrow(Person p, BowandArrow b){
+        b.use(p);
+    }
+
     public static void printthreethings(Person p){
-        System.out.println("Health: "+p.gethealth()+"\nFood: "+p.getnumoffood()+"\nHas Knife? "+p.getKnife());
+        System.out.println("Health: "+p.gethealth()+"\nHas Knife? "+p.getKnife());
     }
 
     //Fills the board with rooms
@@ -102,7 +115,20 @@ public class Runner {
         map[n/2][n/2] = new Cornucopia(n/2,n/2);
 
         if(building.isHardLevel()){
+            for (int x = 0; x<n; x++)
+            {
+                for (int y = 0; y<(n/2)-1; y++) {
+                    map[x][y] = new Lake(x, y);
+                    map[x][y+(n/2)+2] = new Forest(x, y);
+                }
+            }
 
+            for(int y=1; y<n-1;y++){
+                for(int x = 0; x<(n/2)-1; x++) {
+                    map[x][y] = new Lake(x, y);
+                    map[x+(n/2)+2][y] = new Forest(x+(n/2)+2, y);
+                }
+            }
         }
         else{
             //Fill half of the remaining rooms with Lake or Forest rooms
@@ -121,16 +147,16 @@ public class Runner {
         }
     }
 
-
     /**
      * Checks that the movement chosen is within the valid game map.
      * @param move the move chosen
      * @param p person moving
-     * @param map the 2D array of rooms
+     * @param building to turn into the 2D array of rooms
      * @return
      */
-    public static boolean validMove(String move, Person p, Room[][] map)
+    public static boolean validMove(String move, Person p, Board building )
     {
+        Room[][] map = building.getMap();
         move = move.toLowerCase().trim();
         switch (move) {
             case "n":
@@ -138,7 +164,7 @@ public class Runner {
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
                     System.out.println("You are in the "+map[p.getxLoc()-1][p.getyLoc()].getName());
-                    map[p.getxLoc()-1][p.getyLoc()].enterRoom(p);
+                    map[p.getxLoc()-1][p.getyLoc()].enterRoom(p,building);
                     return true;
                 }
                 else
@@ -150,7 +176,7 @@ public class Runner {
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
                     System.out.println("You are in the "+map[p.getxLoc()][p.getyLoc() + 1].getName());
-                    map[p.getxLoc()][p.getyLoc() + 1].enterRoom(p);
+                    map[p.getxLoc()][p.getyLoc() + 1].enterRoom(p, building);
                     return true;
                 }
                 else
@@ -163,7 +189,7 @@ public class Runner {
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
                     System.out.println("You are in the "+map[p.getxLoc()+1][p.getyLoc()].getName());
-                    map[p.getxLoc()+1][p.getyLoc()].enterRoom(p);
+                    map[p.getxLoc()+1][p.getyLoc()].enterRoom(p, building);
                     return true;
                 }
                 else
@@ -176,7 +202,7 @@ public class Runner {
                 {
                     map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
                     System.out.println("You are in the "+map[p.getxLoc()][p.getyLoc()-1].getName());
-                    map[p.getxLoc()][p.getyLoc()-1].enterRoom(p);
+                    map[p.getxLoc()][p.getyLoc()-1].enterRoom(p, building);
                     return true;
                 }
                 else
@@ -189,8 +215,11 @@ public class Runner {
         }
         return true;
     }
-    public static void gameOff()
+    public static void gameOff(Person p)
     {
+        if(p.gethealth()<=0){
+            System.out.println("You died :(");
+        }
         gameOn = false;
     }
 
